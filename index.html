@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="PyDay TF 2017 - Python/Django">
+        <meta name="author" content="Elena M. Marrero Méndez">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<title>PyDayTF 2017 - Python/Django</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<!--link rel="stylesheet" href="lib/css/zenburn.css"-->
+		<link rel="stylesheet" href="lib/css/tomorrow.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
+                    <h1>Python/Django</h1>
+                    <h3>Elena Marrero Méndez</h4>
+                    <p>
+                        <small>#PyDayTF 11/03/2017</small>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>RoadMap</h2>
+                    <ul>
+                        <li>Preparación del entorno</li>
+                        <li>Crear Proyecto</li>
+                        <li>Estructura de un proyecto en Django</li>
+                        <li>Modelo</li>
+                        <li>Vista</li>
+                        <li>Template</li>
+                        <li>Interfaz Administrativa</li>
+                        <li>...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Preparación del entorno</h2>
+                    <h3>virtualenv</h3>
+                    <pre><code class="bash" data-trim contenteditable>
+$ sudo apt-get install -y python-pip
+$ sudo -H pip install virtualenv -U
+$ virtualenv myvenv -p python3.6
+                    </code></pre>
+                    <h4>Trabajando en nuestro virtualenv</h4>
+                    <p>Aislamiento de todas las dependencias</p>
+                    <pre><code class="bash" data-trim contenteditable>
+$ . myvenv/bin/activate
+(myvenv)$ pip install django
+                    </code></pre>
+                    <p>Chequear la versión de django</p>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python -c "import django; print(django.get_version())"
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Crear Proyecto</h2>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ django-admin startproject django_pyday2017
+                    </code></pre>
+                    <h4>Estructura de directorios</h4>
+                    <pre><code class="bash" data-trim contenteditable>
+django_pyday2017
+├─── manage.py
+└─── django_pyday2017
+        settings.py
+        urls.py
+        wsgi.py
+        __init__.py
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Código de Ejemplo</h2>
+                    <pre><code class="python" data-trim contenteditable>
+class Inscripcion(models.Model):
+  nombre_apellidos = models.CharField(max_length=200)
+  nif = models.CharField(max_length=9, )
+  correo = models.EmailField(max_length=30)
+  evento = models.ForeignKey(Evento, related_name='inscritos', )
+  creado_a = models.DateTimeField(auto_now_add=True)
+  actualizado_a = models.DateTimeField(auto_now=True)
+
+  def __str__(self):
+    return self.nombre_apellidos
+
+  class Meta:
+    ordering = ["creado_a"]
+    verbose_name_plural = "inscripciones"
+    unique_together = (("nif", "evento"),)
+                    </code></pre>
+                </section>
+
+				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
+                    <h1>Gracias!</h1>
+                    <h3>Elena Marrero Méndez</h4>
+                    <p>
+                        <small>#PyDayTF 11/03/2017</small>
+                    </p>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+                controls: true,
+                progress: true,
+				history: true,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+			});
+		</script>
+	</body>
+</html>
