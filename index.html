@@ -42,6 +42,7 @@
                     <h2>RoadMap</h2>
                     <ul>
                         <li>Preparación del entorno</li>
+                        <li>Filosofía de Django</li>
                         <li>Crear Proyecto</li>
                         <li>Configuración</li>
                         <li>Requisitos</li>
@@ -53,7 +54,30 @@
                 </section>
 
                 <section>
-                    <h2>Preparación del entorno</h2>
+                    <h2>Preparación del entorno (I)</h2>
+                    <h3>Tecnologías a utilizar</h3>
+                    <ul>
+                        <li>python 3.6</li>
+                        <li>django 1.10</li>
+                        <li>virtualenv</li>
+                        <li>pip</li>
+                    </ul>
+                    <br/>
+
+                    <!--h3>Editores recomendados</h3>
+                    <ul>
+                        <li>pycharm</li>
+                        <li>Aptana</li>
+                        <li>Sublime text</li>
+                    </ul-->
+                </section>
+                <section data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
+                    <h2>Ejercicio 1</h2>
+                              <p>Utilizando las herramientas mencionadas, preparar un entorno de trabajo
+                                  para nuestro proyecto django</p>
+                </section>
+                <section>
+                    <h2>Preparación del entorno (II)</h2>
                     <h3>virtualenv</h3>
                     <pre><code class="bash" data-trim contenteditable>
 $ sudo apt-get install -y python-pip
@@ -66,12 +90,67 @@ $ virtualenv myvenv -p python3.6
 $ . myvenv/bin/activate
 (myvenv)$ pip install django
                     </code></pre>
-                    <p>Chequear la versión de django</p>
+                    <p>Chequear la versión de django (1.10.6) </p>
                     <pre><code class="bash" data-trim contenteditable>
 (myvenv)$ python -c "import django; print(django.get_version())"
                     </code></pre>
                 </section>
 
+                <section>
+                    Imagen peli de django
+                </section>
+
+                <section>
+                    <h2>Filosofía de Django</h2>
+                    <blockquote cite="https://www.djangoproject.com/">
+                        Django is a high-level Python Web framework that encourages rapid development and clean,
+                        pragmatic design
+                    </blockquote>
+                    <ul>
+                        <li class="fragment"> Ridículamente rápido </li>
+                        <li class="fragment"> Tranquilizador y seguro </li>
+                        <li class="fragment"> Excesivamente escalable </li>
+                        <li class="fragment"> Increíblemente versátil </li>
+                        <li class="fragment"> <strong> Sigue el principio DRY <br />(Don't Repeat Yourself) </strong></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Filosofía de Django (II) </h2>
+                    <p> Recibe su nombre de Django Reinhardt y la "D" es muda. </p>
+                </section>
+                <section>
+                    <h2>Filosofía de Django (III)</h2>
+                    <div id="left">
+                    <img width="80%" data-src="images/mvt.png" alt="Model-View-Template">
+                    </div>
+                    <div id="right">
+                        <h3>Model-View-Template</h3>
+                        <ul>
+                            <li>¿Cómo se almacena un dato? <strong class="fragment">Model</strong></li>
+                            <li>¿Qué dato se muestra? <strong class="fragment">View</strong></li>
+                            <li>¿Cómo se representa un dato? <strong class="fragment">Template</strong></li>
+                        </ul>
+                        <h3>Object-Relational Mapper</h3>
+                    </div>
+                </section>
+                <section>
+                    <h2>Filosofía de Django (IV)</h2>
+                    <strong>Garantiza la modularidad y reusabilidad</strong>
+                    <div class="fragment">
+                    <h3>Proyecto (project)</h3>
+                    <p>Configuración y aplicaciones de un sitio web</p>
+                    </div>
+                    <div class="fragment">
+                    <h3>Aplicación (app)</h3>
+                    <p>Aplicación web que cumple una funcionalidad</p>
+                    </div>
+                </section>
+                <section class="example" data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
+                    <h2>Ejercicio 2</h2>
+                    <p> <h3>Gestor de eventos</h3><br/>Crear la estructura de un proyecto django al que llamaremos <code>django_pyday2017</code>
+                        y configurar el proyecto</p>
+
+                </section>
                 <section>
                     <h2>Crear Proyecto</h2>
                     <pre><code class="bash" data-trim contenteditable>
@@ -80,33 +159,35 @@ $ . myvenv/bin/activate
                     <h4>Estructura de directorios</h4>
                     <pre><code class="bash" data-trim contenteditable>
 django_pyday2017
-├─── manage.py
+├─── manage.py           - python manage.py (no tocar)
 └─── django_pyday2017
-        settings.py
-        urls.py
-        wsgi.py
-        __init__.py
+        settings.py      - Configuración del proyecto
+        urls.py          - Asociar URLs a vistas
+        wsgi.py          - Servidor wsgi (no tocar)
+        __init__.py      - Paquete (no tocar)
                     </code></pre>
                 </section>
 
                 <section>
-                     <h2>Configuración</h2>
-                     <p><i>settings.py</i> contiene la configuración del sitio web</p>
+                    <h2>Crear Proyecto (II)</h2>
+                     <p><code>settings.py</code> contiene la configuración del sitio web</p>
                     <pre><code class="python" data-trim contenteditable>
 ...
 TIME_ZONE = 'Atlantic/Canary'  # Zona Horaria
 LANGUAGE_CODE = 'es'  # Código de Idioma
 ...
-# Ruta para ficheros estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
                     </code></pre>
+
                     <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/settings/">https://docs.djangoproject.com/en/1.10/ref/settings/</a></small></p>
                 </section>
 
                 <section>
-                     <h2>Configuración (II)</h2>
-                     <p>Para servir los ficheros estáticos necesitamos añadir una nueva url en el fichero <i>urls.py</i></p>
+                     <h2>Crear Proyecto (III)</h2>
+                     <p>Para servir los ficheros estáticos necesitamos añadir una nueva url en el fichero <code>urls.py</code></p>
                     <pre><code class="python" data-trim contenteditable>
 from django.conf import settings as st
 from django.conf.urls.static import static
@@ -116,10 +197,14 @@ urlpatterns = [
 ] + static(st.STATIC_URL, document_root=st.STATIC_ROOT)
                     </code></pre>
                     <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/urls/">https://docs.djangoproject.com/en/1.10/ref/urls/</a></small></p>
+                    <h4>Recolectar los archivos estáticos</h4>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python manage.py collectstatic
+                    </code></pre>
                 </section>
 
                 <section>
-                     <h2>Configuración (III)</h2>
+                     <h2>Crear Proyecto (IV)</h2>
                      <p>Gran variedad de opciones de bases de datos: PostgreSQL, MySQL, SQLite, Oracle, ...</p>
                     <pre><code class="python" data-trim contenteditable>
 DATABASES = {
@@ -146,8 +231,64 @@ DATABASES = {
                 </section>
 
                 <section>
-                    <h2>Requisitos</h2>
+                    <h2>Fichero de requisitos</h2>
+                                        <code>requirements.txt</code> contiene todos los paquetes que serán necesarios para el proyecto
+
+                    <div id="left">
+                    <pre><code class="bash" data-trim contenteditable>
+                    .
+├── db.sqlite3
+├── django_pyday2017
+│   ...
+├── manage.py
+└── requirements.txt
+                    </code></pre>
+                    </div>
+                    <div id="right">
+                    <pre><code class="bash" data-trim contenteditable>
+django < 1.11
+Werkzeug
+django-extensions
+Pillow
+django-localflavor
+django-crispy-forms
+                    </code></pre>
+                    </div>
+                    <h4>Lanzar la instalación de requisitos</h4>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ pip install -Ur requirements.txt
+                    </code></pre>
                 </section>
+                <section>
+                <section data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
+                    <h2>Ejercicio 3</h2>
+                    <h3>Añadir el módulo django-extensions</h3>
+                    <p> Extensión de comandos propios del manage.py </p>
+                    <p>https://django-extensions.readthedocs.io/en/latest/installation_instructions.html</p>
+                </section>
+                <section>
+                    <h2>Añadir el módulo django-extensions</h2>
+                    <ul>
+                        <li>Añadirlo al <code>requirements.txt</code> e instalarlo</li>
+                        <li>Añadirlo en <code>INSTALLED_APPS</code> en el <code>settings.py</code>
+                        <pre><code class="python" data-trim contenteditable>
+INSTALLED_APPS = [
+    ...,
+    'django_extensions',
+]
+                    </code></pre></li>
+                        <li>Actualizar la base de datos<pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python manage.py migrate
+                    </code></pre>
+                        </li>
+                    </ul>
+                    <p>Arrancamos la aplicación con modo debug integrado</p>
+                                        <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python manage.py runserver_plus
+                    </code></pre>
+                </section>
+                </section>
+                
 
 				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
                     <h1>Gracias!</h1>
