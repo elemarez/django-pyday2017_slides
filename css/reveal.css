@@ -1383,6 +1383,7 @@ body {
 
 .slides section.has-dark-background,
 .slides section.has-dark-background h2,
-.slides section.has-dark-background h3 {
+.slides section.has-dark-background h3,
+.slides section.has-dark-background h4 {
 	color: white;
 }

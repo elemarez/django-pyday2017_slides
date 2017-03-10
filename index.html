@@ -97,7 +97,12 @@ $ . myvenv/bin/activate
                 </section>
 
                 <section>
-                    Imagen peli de django
+                    <video data-autoplay src="https://youtu.be/1kWjU7yl5ak"></video>
+                </section>
+
+                <section><div width="100%">
+                   <iframe width="1280" height="720" src="https://www.youtube.com/embed/1kWjU7yl5ak?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </div>
                 </section>
 
                 <section>
@@ -148,7 +153,7 @@ $ . myvenv/bin/activate
                 <section class="example" data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
                     <h2>Ejercicio 2</h2>
                     <p> <h3>Gestor de eventos</h3><br/>Crear la estructura de un proyecto django al que llamaremos <code>django_pyday2017</code>
-                        y configurar el proyecto</p>
+                        y configurarlo</p>
 
                 </section>
                 <section>
@@ -178,6 +183,7 @@ TIME_ZONE = 'Atlantic/Canary'  # Zona Horaria
 LANGUAGE_CODE = 'es'  # Código de Idioma
 ...
 STATIC_URL = '/static/'
+STATIC_ROOT = 'collected_static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -186,26 +192,8 @@ STATICFILES_DIRS = [
                     <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/settings/">https://docs.djangoproject.com/en/1.10/ref/settings/</a></small></p>
                 </section>
 
-                <section>
+                 <section>
                      <h2>Crear Proyecto (III)</h2>
-                     <p>Para servir los ficheros estáticos necesitamos añadir una nueva url en el fichero <code>urls.py</code></p>
-                    <pre><code class="python" data-trim contenteditable>
-from django.conf import settings as st
-from django.conf.urls.static import static
-
-urlpatterns = [
-    # ... resto de tus URLs ...
-] + static(st.STATIC_URL, document_root=st.STATIC_ROOT)
-                    </code></pre>
-                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/urls/">https://docs.djangoproject.com/en/1.10/ref/urls/</a></small></p>
-                    <h4>Recolectar los archivos estáticos</h4>
-                    <pre><code class="bash" data-trim contenteditable>
-(myvenv)$ python manage.py collectstatic
-                    </code></pre>
-                </section>
-
-                <section>
-                     <h2>Crear Proyecto (IV)</h2>
                      <p>Gran variedad de opciones de bases de datos: PostgreSQL, MySQL, SQLite, Oracle, ...</p>
                     <pre><code class="python" data-trim contenteditable>
 DATABASES = {
@@ -223,6 +211,26 @@ DATABASES = {
                 </section>
 
                 <section>
+                     <h2>Crear Proyecto (IV)</h2>
+                     <p>Para servir los ficheros estáticos necesitamos añadir una nueva url en el fichero <code>urls.py</code></p>
+                     <pre><code class="python" data-trim contenteditable>
+from django.conf import settings as st
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... resto de tus URLs ...
+] + static(st.STATIC_URL, document_root=st.STATIC_ROOT)
+                    </code></pre>
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/urls/">https://docs.djangoproject.com/en/1.10/ref/urls/</a></small></p>
+                    <h4>Recolectar los archivos estáticos</h4>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python manage.py collectstatic
+                    </code></pre>
+                </section>
+
+
+
+                <section>
                     <h2>Lanzar el Servidor de Desarrollo</h2>
                     <pre><code class="bash" data-trim contenteditable>
 (myvenv)$ python manage.py runserver
@@ -237,7 +245,7 @@ DATABASES = {
 
                     <div id="left">
                     <pre><code class="bash" data-trim contenteditable>
-                    .
+.
 ├── db.sqlite3
 ├── django_pyday2017
 │   ...
@@ -260,12 +268,11 @@ django-crispy-forms
 (myvenv)$ pip install -Ur requirements.txt
                     </code></pre>
                 </section>
-                <section>
                 <section data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
                     <h2>Ejercicio 3</h2>
                     <h3>Añadir el módulo django-extensions</h3>
                     <p> Extensión de comandos propios del manage.py </p>
-                    <p>https://django-extensions.readthedocs.io/en/latest/installation_instructions.html</p>
+                    <p><small><a target="_blank" href="https://django-extensions.readthedocs.io/en/latest/installation_instructions.html">https://django-extensions.readthedocs.io/en/latest/installation_instructions.html</a></small></p>
                 </section>
                 <section>
                     <h2>Añadir el módulo django-extensions</h2>
@@ -288,8 +295,208 @@ INSTALLED_APPS = [
 (myvenv)$ python manage.py runserver_plus
                     </code></pre>
                 </section>
+                <section class="example" data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
+                    <h2>Ejercicio 4</h2>
+                    <div id="left">
+                                            <h3>Gestor de eventos</h3>
+
+                    <p>Crear una aplicación en django llamada <code>events</code> que
+                    servirá para gestionar y publicar un listado de próximos eventos, así como para gestionar las
+                    inscripciones a los mismos.</p>
+                    </div>
+                    <div id="right">
+                    <img height="80%" data-src="images/diagrama_events.png" alt="Model-View-Template">
+                    </div>
                 </section>
-                
+
+                 <section>
+                    <h2>Crear Aplicación</h2>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ django-admin startapp events
+                    </code></pre>
+                     <p>Añadir la aplicación en <code>INSTALLED_APPS</code> en el <code>settings.py</code></p>
+                 </section>
+                <section>
+                    <h2>Crear Aplicación (II)</h2>
+                    <h4>Estructura de directorios</h4>
+                    <pre><code class="bash" data-trim contenteditable>
+.
+├── db.sqlite3
+├── django_pyday2017
+│   ...
+├── events
+│   ├── admin.py         - Interfaz administrativa
+│   ├── apps.py          - Configuración de la aplicación
+│   ├── __init__.py
+│   ├── migrations       - Migraciones de la BBDD
+│   │   └── __init__.py
+│   ├── models.py        - Definición de la BBDD
+│   ├── tests.py         - Tests
+│   └── views.py         - Gestión de los datos
+├── manage.py
+└── requirements.txt
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Modelos</h2>
+                    <ul>
+                        <li>Crear la definición de los modelos en el archivo <code>models.py</code><br />
+                            <small><a target="_blank" href="https://docs.djangoproject.com/es/1.10/ref/models/fields/">https://docs.djangoproject.com/es/1.10/ref/models/fields/</a></small>
+                        </li>
+                        <li>Generar, ver y aplicar las migraciones de la BBDD respecto a los modelos
+                            <pre><code class="bash" data-trim contenteditable>
+(myvenv) $ python manage.py makemigrations events
+(myvenv) $ python manage.py sqlmigrate events 0001
+(myvenv) $ python manage.py migrate
+                    </code></pre>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Interfaz de administración</h2>
+                    <p>Crear un superusuario <pre><code class="bash" data-trim contenteditable>
+(myvenv) $ python manage.py createsuperuser
+Username (leave blank to use 'pyday'): admin
+Email address: a@a.es
+Password: pyday2017
+                </code></pre></p>
+                    <p>
+                    Registramos los modelos editando <code>admin.py</code>.
+                    <pre><code class="python" data-trim contenteditable>
+from django.contrib import admin
+from .models import Evento, Inscripcion
+
+admin.site.register(Evento)
+admin.site.register(Inscripcion)
+                    </code></pre>
+                </p>
+                    <p><a target="_blank" href="http://127.0.0.1:8000/admin">http://127.0.0.1:8000/admin</a></p>
+                </section>
+
+                <section>
+                    <h2>Object-Relational Mapper (ORM)</h2>
+                    <p>API que permite la abstracción de la BBDD:
+                    <ul>
+                        <li>Crear, modificar y borrar tuplas (objetos)</li>
+                        <li>Obtener tuplas (get, filter, all)</li>
+                        <li>Contar, ordenar, ...</li>
+                    </ul></p>
+                    <p>
+                        Abrimos una shell interactiva del proyecto y empezamos a jugar
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv) $ python manage.py shell_plus
+                </code></pre></p>
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/topics/db/queries/">https://docs.djangoproject.com/en/1.10/topics/db/queries/</a></small></p>
+                </section>
+
+
+                <section data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
+                    <h2>Ejercicio 5</h2>
+                    <h3>Gestor de eventos</h3>
+                    <h4>Añadir funcionalidad a la Interfaz Administrativa</h4>
+                    <p><small><a target="_blank" href="https://django-extensions.readthedocs.io/en/latest/installation_instructions.html">https://django-extensions.readthedocs.io/en/latest/installation_instructions.html</a></small></p>
+                    <ul>
+                        <li> Añadir el número de inscritos en un evento </li>
+                        <li> Añadir inscripciones desde el propio evento </li>
+                        <li> Añadir un filtro lateral </li>
+                        <li> Publicar eventos de forma masiva </li>
+                        <li>...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Interfaz pública</h2>
+                    <div id="left">
+                    <img width="80%" data-src="images/mvt.png" alt="Model-View-Template">
+                    </div>
+                    <div id="right">
+                        <h3> Ciclo de desarrollo habitual:</h3>
+                     <ul>
+                         <li>URL</li>
+                         <li>View</li>
+                         <li>Template</li>
+                     </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Interfaz pública (II)</h2>
+                    <h3>URLs</h3>
+                    <p>Añadir nuestra aplicación al <code>urls.py</code> general
+                                        <pre><code class="python" data-trim contenteditable>
+from django.conf.urls import url
+
+urlpatterns = [
+    ...
+    url(r'^evento/', include('events.urls')),
+    ...
+]
+                    </code></pre>
+                    </p>
+                    <p>
+                    En el específico, definir una por cada acción que se quiera realizar.
+                    <pre><code class="python" data-trim contenteditable>
+url(r'^(?P&ltevento_id&gt\d+)/$', views.detalle, name='detalle'),
+                </code></pre>
+
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Vistas genéricas</h2>
+                    <blockquote>Las vistas genéricas abstraen los patrones comunes hasta el punto en que ni
+                        siquiera es necesario escribir código Python para escribir una aplicación.</blockquote>
+                    <img width="100%" data-src="images/generic_views.png" alt="Generic Views">
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/class-based-views/">
+                        https://docs.djangoproject.com/en/1.10/ref/class-based-views/
+                        </a></small></p>
+                </section>
+
+                <section>
+                    <h2>Plantillas</h2>
+                    <p>Creación del directorio <code>templates</code> en la raíz del proyecto y un subdirectorio por cada aplicación.</p>
+                    <pre><code class="bash" data-trim contenteditable>
+.
+├── events
+|   ...
+├── manage.py
+├── requirements.txt
+├── static
+│   ...
+└── templates
+    ├── base.html             - Genérica con bloques definidos
+    └── events
+        ├── ..._detail.html   - Extienden de base y rellenan
+        └── ..._form.html         los bloques
+                    </code></pre>
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/templates/language/">
+                        https://docs.djangoproject.com/en/1.10/ref/templates/language/
+                        </a></small></p>
+                </section>
+
+                <section data-transition="slide" data-background-color="darkgreen" data-background-transition="zoom">
+                    <h2>Ejercicio 6</h2>
+                    <h3>Gestor de eventos</h3>
+                    <h4>Añadir la siguiente funcionalidad pública</h4>
+                    <ul>
+                        <li> Listado de los eventos públicos </li>
+                        <li> Detalle de un evento en particular </li>
+                        <li> Inscripción en un evento accesible desde el detalle y desde el listado </li>
+                        <li> Detalle de la inscripción </li>
+                        <li>...</li>
+                    </ul>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
 
 				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
                     <h1>Gracias!</h1>
