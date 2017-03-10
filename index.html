@@ -32,7 +32,7 @@
 
 				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
                     <h1>Python/Django</h1>
-                    <h3>Elena Marrero Méndez</h4>
+                    <h3>Elena Marrero Méndez</h3>
                     <p>
                         <small>#PyDayTF 11/03/2017</small>
                     </p>
@@ -44,12 +44,9 @@
                         <li>Preparación del entorno</li>
                         <li>Filosofía de Django</li>
                         <li>Crear Proyecto</li>
-                        <li>Configuración</li>
-                        <li>Requisitos</li>
-                        <li>Modelos</li>
-                        <li>Interfaz Administrativa</li>
-                        <li>Vistas</li>
-                        <li>Templates</li>
+                        <li>Crear Aplicación</li>
+                        <li>Interfaz de Administración</li>
+                        <li>Interfaz Pública</li>
                     </ul>
                 </section>
 
@@ -116,11 +113,7 @@ $ . myvenv/bin/activate
                     </ul>
                 </section>
                 <section>
-                    <h2>Filosofía de Django (II) </h2>
-                    <p> Recibe su nombre de Django Reinhardt y la "D" es muda. </p>
-                </section>
-                <section>
-                    <h2>Filosofía de Django (III)</h2>
+                    <h2>Filosofía de Django (II)</h2>
                     <div id="left">
                     <img width="80%" data-src="images/mvt.png" alt="Model-View-Template">
                     </div>
@@ -135,8 +128,8 @@ $ . myvenv/bin/activate
                     </div>
                 </section>
                 <section>
-                    <h2>Filosofía de Django (IV)</h2>
-                    <strong>Garantiza la modularidad y reusabilidad</strong>
+                    <h2>Filosofía de Django (III)</h2>
+                    <p><strong>Garantiza la modularidad y reusabilidad</strong></p>
                     <div class="fragment">
                     <h3>Proyecto (project)</h3>
                     <p>Configuración y aplicaciones de un sitio web</p>
@@ -416,8 +409,7 @@ admin.site.register(Inscripcion)
                 </section>
 
                 <section>
-                    <h2>Interfaz pública (II)</h2>
-                    <h3>URLs</h3>
+                    <h2>URLs</h2>
                     <p>Añadir nuestra aplicación al <code>urls.py</code> general
                                         <pre><code class="python" data-trim contenteditable>
 from django.conf.urls import url
