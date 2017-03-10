@@ -93,13 +93,14 @@ django_pyday2017
                      <h2>Configuración</h2>
                      <p><i>settings.py</i> contiene la configuración del sitio web</p>
                     <pre><code class="python" data-trim contenteditable>
+ALLOWED_HOSTS = ['*', ]
 ...
 TIME_ZONE = 'Atlantic/Canary'  # Zona Horaria
 LANGUAGE_CODE = 'es'  # Código de Idioma
 ...
 # Ruta para ficheros estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
                     </code></pre>
                     <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/settings/">https://docs.djangoproject.com/en/1.10/ref/settings/</a></small></p>
                 </section>
@@ -147,6 +148,7 @@ DATABASES = {
 
                 <section>
                     <h2>Requisitos</h2>
+                    <p>Crear un fichero <i>requirements.txt</i> con las dependencias</p>
                 </section>
 
 				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
