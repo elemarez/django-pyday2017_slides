@@ -44,11 +44,11 @@
                         <li>Preparación del entorno</li>
                         <li>Crear Proyecto</li>
                         <li>Configuración</li>
-                        <li>Modelo</li>
-                        <li>Vista</li>
-                        <li>Template</li>
+                        <li>Requisitos</li>
+                        <li>Modelos</li>
                         <li>Interfaz Administrativa</li>
-                        <li>...</li>
+                        <li>Vistas</li>
+                        <li>Templates</li>
                     </ul>
                 </section>
 
@@ -116,6 +116,37 @@ urlpatterns = [
 ] + static(st.STATIC_URL, document_root=st.STATIC_ROOT)
                     </code></pre>
                     <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/urls/">https://docs.djangoproject.com/en/1.10/ref/urls/</a></small></p>
+                </section>
+
+                <section>
+                     <h2>Configuración (III)</h2>
+                     <p>Gran variedad de opciones de bases de datos: PostgreSQL, MySQL, SQLite, Oracle, ...</p>
+                    <pre><code class="python" data-trim contenteditable>
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
+}
+                    </code></pre>
+                    <h4>Creación de la Base de Datos</h4>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python manage.py migrate
+                    </code></pre>
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/settings/#databases">https://docs.djangoproject.com/en/1.10/ref/settings/#databases</a></small></p>
+                </section>
+
+                <section>
+                    <h2>Lanzar el Servidor de Desarrollo</h2>
+                    <pre><code class="bash" data-trim contenteditable>
+(myvenv)$ python manage.py runserver
+                    </code></pre>
+                    <p>Verifica que tu sitio web está corriendo</p>
+                    <p><a target="_blank" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a></p>
+                </section>
+
+                <section>
+                    <h2>Requisitos</h2>
                 </section>
 
 				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">

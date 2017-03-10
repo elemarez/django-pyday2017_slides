@@ -1147,7 +1147,7 @@ Some reveal.js features, like external Markdown and speaker notes, require that 
 1. Install [Node.js](http://nodejs.org/) (4.0.0 or later)
    ```sh
    $ sudo apt-get install npm
-   $ sudo ln -s /usr/bin/node /usr/bin/nodejs
+   $ sudo ln -s /usr/bin/nodejs /usr/bin/node
    $ npm install grunt
 
 1. Clone the reveal.js repository
