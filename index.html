@@ -43,7 +43,7 @@
                     <ul>
                         <li>Preparación del entorno</li>
                         <li>Crear Proyecto</li>
-                        <li>Estructura de un proyecto en Django</li>
+                        <li>Configuración</li>
                         <li>Modelo</li>
                         <li>Vista</li>
                         <li>Template</li>
@@ -90,24 +90,32 @@ django_pyday2017
                 </section>
 
                 <section>
-                    <h2>Código de Ejemplo</h2>
+                     <h2>Configuración</h2>
+                     <p><i>settings.py</i> contiene la configuración del sitio web</p>
                     <pre><code class="python" data-trim contenteditable>
-class Inscripcion(models.Model):
-  nombre_apellidos = models.CharField(max_length=200)
-  nif = models.CharField(max_length=9, )
-  correo = models.EmailField(max_length=30)
-  evento = models.ForeignKey(Evento, related_name='inscritos', )
-  creado_a = models.DateTimeField(auto_now_add=True)
-  actualizado_a = models.DateTimeField(auto_now=True)
-
-  def __str__(self):
-    return self.nombre_apellidos
-
-  class Meta:
-    ordering = ["creado_a"]
-    verbose_name_plural = "inscripciones"
-    unique_together = (("nif", "evento"),)
+...
+TIME_ZONE = 'Atlantic/Canary'  # Zona Horaria
+LANGUAGE_CODE = 'es'  # Código de Idioma
+...
+# Ruta para ficheros estáticos
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
                     </code></pre>
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/settings/">https://docs.djangoproject.com/en/1.10/ref/settings/</a></small></p>
+                </section>
+
+                <section>
+                     <h2>Configuración (II)</h2>
+                     <p>Para servir los ficheros estáticos necesitamos añadir una nueva url en el fichero <i>urls.py</i></p>
+                    <pre><code class="python" data-trim contenteditable>
+from django.conf import settings as st
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... resto de tus URLs ...
+] + static(st.STATIC_URL, document_root=st.STATIC_ROOT)
+                    </code></pre>
+                    <p><small><a target="_blank" href="https://docs.djangoproject.com/en/1.10/ref/urls/">https://docs.djangoproject.com/en/1.10/ref/urls/</a></small></p>
                 </section>
 
 				<section data-background="images/djangopony.png" data-background-size="600px" data-state="img-right-bottom">
